@@ -157,6 +157,9 @@ case "#{$kube_network}" in
         kubectl apply -f -
   ;;
 # flannel network
+[Nn][Oo][Nn][Ee])
+    echo "Skipping CNI setup"
+    ;;
 *)
     echo "Installing Flannel CNI ..."
     curl --retry 5 --fail -s https://raw.githubusercontent.com/coreos/flannel/v0.11.0/Documentation/kube-flannel.yml | \
