@@ -124,7 +124,7 @@ done
 
 if [ "#{BOX_OS}" == "ubuntu" ]; then
     KUBELET_EXTRA_ARGS_FILE=/etc/default/kubelet
-    echo 'KUBELET_EXTRA_ARGS=--node-ip=#{NODE_IP} --cni-bin-dir=/opt/cni/bin,/usr/libexec/cni' > "${KUBELET_EXTRA_ARGS_FILE}"
+    echo 'KUBELET_EXTRA_ARGS=--node-ip=#{MASTER_IP} --cni-bin-dir=/opt/cni/bin,/usr/libexec/cni' > "${KUBELET_EXTRA_ARGS_FILE}"
 else
     KUBELET_EXTRA_ARGS_FILE=/etc/sysconfig/kubelet
 
