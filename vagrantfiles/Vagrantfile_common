@@ -65,6 +65,7 @@ net.ipv6.conf.all.accept_dad = 0
 net.ipv6.conf.default.accept_dad = 0
 net.bridge.bridge-nf-call-iptables = 1
 net.ipv4.conf.all.rp_filter = 0
+vm.nr_hugepages = 1024
 EOF
 sysctl -p /etc/sysctl.conf
 
@@ -78,6 +79,7 @@ ip_vs_rr
 nf_conntrack
 nf_conntrack_ipv4
 nf_conntrack_ipv6
+uio_pci_generic
 EOF
 
 # Set mtu of eth0 and eth1 devices to 1300, otherwise there may be issues when using a VPN on the host system.
@@ -156,10 +158,10 @@ case "#{$kube_network}" in
         sed -e 's?192.168.0.0/16?#{POD_NW_CIDR}?g' | \
         kubectl apply -f -
   ;;
-# flannel network
 [Nn][Oo][Nn][Ee])
     echo "Skipping CNI setup"
     ;;
+# flannel network
 *)
     echo "Installing Flannel CNI ..."
     curl --retry 5 --fail -s https://raw.githubusercontent.com/coreos/flannel/v0.11.0/Documentation/kube-flannel.yml | \
