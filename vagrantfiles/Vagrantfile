@@ -15,12 +15,13 @@ else
     $vagrantfilepath = "../Vagrantfile_node"
 end
 
-$osprefile = File.expand_path("../#{BOX_OS}/pre", __FILE__)
-load $osprefile if File.exist?($osprefile)
-
 # Load the Vagrantfile_common file
 $vagrantfilecommon = File.expand_path('../Vagrantfile_common', __FILE__)
 load $vagrantfilecommon
+
+# Load OS-specific overrides
+$osprefile = File.expand_path("../#{BOX_OS}/pre", __FILE__)
+load $osprefile if File.exist?($osprefile)
 
 # Load the common os file if it exists
 $oscommonvariablefile = File.expand_path("../#{BOX_OS}/common", __FILE__)
