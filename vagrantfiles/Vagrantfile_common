@@ -19,6 +19,7 @@ MASTER_IP = ENV['MASTER_IP'] || '192.168.26.10'
 POD_NW_CIDR = ENV['POD_NW_CIDR'] || '10.244.0.0/16'
 NODE_IP_NW = ENV['NODE_IP_NW'] || '192.168.26.'
 NODE_IP = NODE_IP_NW + (NODE + 10).to_s
+DNS_SERVER = ENV['DNS_SERVER'] || '8.8.8.8'
 
 # Addons
 K8S_DASHBOARD = ENV['K8S_DASHBOARD'].downcase == "true" || false

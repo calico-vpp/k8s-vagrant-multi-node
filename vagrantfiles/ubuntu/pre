@@ -1,9 +1,9 @@
 $kube_network = 'none'
 
 $osPrepareScript = <<SCRIPT
-sed -i 's/^DNS=.*/DNS=8.8.8.8 8.8.4.4/' /etc/systemd/resolved.conf
+sed -i 's/^DNS=.*/DNS=#{DNS_SERVER}/' /etc/systemd/resolved.conf
 sed -i 's/^DNSSEC=.*/DNSSEC=no/' /etc/systemd/resolved.conf
-sed -i 's/addresses:.*/addresses: [8.8.8.8, 8.8.4.4]/' /etc/netplan/01-netcfg.yaml
+sed -i 's/addresses:.*/addresses: [#{DNS_SERVER}]/' /etc/netplan/01-netcfg.yaml
 netplan apply
 systemctl restart systemd-resolved
 systemd-resolve --flush-caches
