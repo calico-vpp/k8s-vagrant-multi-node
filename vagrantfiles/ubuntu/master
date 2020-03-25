@@ -1,6 +1,13 @@
 $baseInstallScript = <<SCRIPT
 set -x
 
+cat <<EOF > /etc/apt/apt.conf.d/proxy.conf
+Acquire {
+  HTTP::proxy "#{ENV['HTTP_PROXY']}";
+  HTTPS::proxy "#{ENV['HTTP_PROXY']}";
+}
+EOF
+
 retries=5
 for ((i=0; i<retries; i++)); do
     apt-get update
